@@ -1,0 +1,7 @@
+Flask==0.10.1
+Jinja2==2.7.2
+flask-wtf
+PyMySQL==0.6.2
+Werkzeug==0.9.4
+Pillow==2.3.0
+
