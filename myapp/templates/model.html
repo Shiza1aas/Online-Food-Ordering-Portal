@@ -1,0 +1,343 @@
+<!doctype html>
+<html>
+<head>
+	<title>{% block title %}Project{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/bootstrap.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/custom.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/animate.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/font-awesome-4.2.0/css/font-awesome.min.css')}}">
+  <!--link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}"-->
+  <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/merg.css')}}">
+  <script src="{{url_for('static',filename='javascript/vendor/modernizr-2.7.1.min.js')}}"></script>
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine,bolditalic|Inconsolata:italic|Droid+Sans">
+</head>
+<body data-spy="scroll"id="lload">
+<div class="navbar-custom navbar-fixed-top" >
+  <div class="container">
+    <div class="navbar-header page-scroll">
+     <!--a href="#place"role="button"  data-toggle="modal"><button class="btn btn-warning bod-rad"style="margin-top:8px;font-size:1em;"><b>{{location}}&nbsp;<span class='glyphicon glyphicon-map-marker pull-right'></span></b></button></a-->
+       <!--button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse" style="color:red;">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+       </button-->
+       <a class="navbar-brand" href="{{url_for('home.home')}}"style="margin-top:-25px;"><img src="/static/image/brand2.png"></a>
+    </div>
+    <div class="collapse navbar-collapse navHeaderCollapse">
+
+            <ul class="nav navbar-nav navbar-right " >
+                <li>
+                    <form class="search" action="/searchresult/" method="get" enctype="multipart/form-data" id="m_s">
+                          <div class="form-group">
+                          <input type="search" name="q" id="bt" class="form-control search_box"placeholder="Please type Location..." autocomplete="off" >
+                          <ul class="results" style="font-family:Times;"></ul>
+                          </div>
+                      </form>
+                </li>
+                <li style="margin-top:12px;margin-left:;"id="quer_btn">
+                  <i class="fa fa-arrow-circle-right fa-3x"style="color:white;cursor:pointer;"></i>
+                </li>
+                <li style="margin-top:-15px;margin-right:-36px;">
+                      <a href="/"><div class="circle-icon"style="background-color:#FFE4B5
+                          ;color:black;">
+                          <i class="fa fa-home fa-2x"></i></div>
+                      </a>
+                </li>
+                <li id="off"style="margin-top:-15px;margin-right:-13px;">
+                  <a href="/#offer">
+                    <div class="circle-icon"style="background-color:#87CEEB
+                          ;color:black;">
+                    <i class="fa fa-gift fa-2x"></i>
+                  </div>
+                  </a>
+                </li>
+                {%if g.cart %}
+                <li style="margin-top:-15px;margin-left:-21px;">
+                <a href="{{g.cart}}">
+                  <div class="circle-icon"style="background-color:#FFB6C1
+                          ;color:black;">
+                    <i class="fa fa-shopping-cart fa-2x"></i>
+                    {%if g.count %}
+                    <span class="badge" id="cart_badge">{{g.count}}</span>
+                    {%else%}
+                    <span class="badge" id="cart_badge">0</span>
+                    {%endif%}
+                  </div>
+                  </a>
+                </li>
+                {%else%}
+                <li style="margin-top:0px;margin-left:-6px;margin-right:17px;">
+                  <div class="circle-icon"style="background-color:#FFB6C1
+                          ;color:black;">
+                    <i class="fa fa-shopping-cart fa-2x"></i>
+                    {%if g.count %}
+                    <span class="badge" id="cart_badge">{{g.count}}</span>
+                    {%else%}
+                    <span class="badge" id="cart_badge">0</span>
+                    {%endif%}
+                  </div>
+                </li>
+                {%endif%}
+                {%if g.user%}
+                <li style="margin-top:0px;margin-left:-21px;">
+                <span>
+                  <div class="circle-icon"style="background-color:limegreen
+                          ;color:black;">
+                    <i class="glyphicon glyphicon-user fa-2x"></i>
+                  </div>
+                  <ul id="prodown"style="font-size:1.5em;color:black;">
+                    <li class="list-group-item "><a href="{{url_for('profile.pro')}}"id="prod" style="color:black;">Profile</a></li>
+                    <li class="list-group-item"><a href="{{url_for('home.logout')}}"style="color:black;">Logout</a></li>
+                  </ul>
+                </span>
+                </li>
+                {% else %}
+                <li style="margin-top:-15px;margin-left:-36px;">
+                  <a href="#loginmodel" role="button"  data-toggle="modal">
+                  <div class="circle-icon"style="background-color:#9932CC
+                          ;color:black;">
+                    <i class="fa fa-sign-in fa-2x"></i>
+                  </div>
+                  </a>
+                </li>
+                {%endif%}
+                
+            </ul>
+    </div>
+  </div>
+</div>
+<!--div id='loadhere'-->
+{% block text %}
+{% endblock %}
+</div><br>
+<!--Login Model-->
+<!-- Modal -->
+<div class="modal custom fade mod-sign" id="loginmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog mod-sig"style="margin-top:100px;">
+    <div class="modal-content bod-rad">
+      <div class="modal-header"style="background-color:#6495ED;color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><center><b>Login to example</b></center></h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <b>Log In as</b>  &nbsp;&nbsp;User: <input type="radio" name="log4" value="us">&nbsp;&nbsp;&nbsp;&nbsp;
+          Other: <input type="radio" name="log4" value="ot">
+          <span id="radchk"></span>
+        </div>
+        <div class="form-group">
+                  <input type="email" id="logm"class="form-control input-lg bod-rad 
+                  txt-center" placeholder="Email"  required>
+               <center><span id="slogm"></span></center>
+        </div>
+        <div class="form-group">
+                  <input type="password" id="logp"class="form-control input-lg bod-rad 
+                  txt-center" placeholder="Password" required>
+               <center><span id="slogp"></span></center>
+        </div>
+        <div class="form-group">
+                  <button id="logb"class="form-control btn btn-lg btn-primary input-lg bod-rad txt-center">
+                    Sign In
+                  </button>
+               <center><span id="slogb"></span></center>
+        </div>
+        <div class="form-group">
+                <!--a href=""><span class="pull-left">forget password</span></a-->
+                <a href="#signupmodel"role="button" data-toggle="modal" data-dismiss="modal"><span class="pull-right">Signup as User</span></a>
+                <a href="#otheruser"role="button" data-toggle="modal" data-dismiss="modal"><span class="pull-left">Signup as Other</span></a>
+                <br>
+        </div>
+      </div>
+      <!--div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div-->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+  </div>
+
+
+<div class="modal custom fade mod-sig" id="signupmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog mod-sig"style="margin-top:100px;">
+    <div class="modal-content bod-rad ">
+      <div class="modal-header"style="background-color:#6495ED;color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><center><b>SignUp to example</b></center></h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+                  <input type="email" id="sigm"class="form-control input-lg bod-rad 
+                  txt-center" placeholder="Email"  required>
+                  <center><span id="ssigm"></span></center>
+        </div>
+        <div class="form-group">
+                  <input type="text" id="sign"class="form-control input-lg bod-rad 
+                  txt-center" placeholder="Name"  required>
+                  <center><span id="ssign"></span></center>
+        </div>
+        <div class="form-group">
+                  <input type="password" id="sigp"class="form-control input-lg bod-rad 
+                  txt-center" placeholder="Password" required>
+                  <span id="issigp"></span>
+               <center><span id="ssigp"></span></center>
+        </div>
+        <div class="form-group">
+                  <button id="sigb"class="form-control btn btn-lg btn-primary input-lg bod-rad txt-center">
+                    Signup
+                  </button>
+               <center><span id="ssigb"></span></center>
+        </div>
+        <div class="form-group">
+               <center><span>Already have an account </span> <a href="#loginmodel"role="button" data-toggle="modal" data-dismiss="modal"><span class="">login here</span></a></center>
+                <br>
+        </div>
+      </div>
+      <!--div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div-->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+  </div>
+
+<div class="modal custom fade mod-sig" id="otheruser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog mod-sig"style="margin-top:;">
+    <div class="modal-content bod-rad ">
+      <div class="modal-header"style="background-color:#6495ED;color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><center><b>SignUp as Rest.</b></center></h4>
+      </div>
+      <div class="modal-body"style="font-weight:bold;">
+        <div class="form-group">
+                  <input type="email" id="o_email"class="form-control  bod-rad 
+                  txt-center" placeholder="Email"  required>
+                  <center><span id="so_email"></span></center>
+        </div>
+        <div class="form-group">
+                  <input type="text" id="o_name"class="form-control  bod-rad 
+                  txt-center" placeholder="Resturent Name"  required>
+                  <center><span id="so_name"></span></center>
+        </div>
+        <!--div class="form-group">
+                  <input type="text" id="o_locality"class="form-control  bod-rad 
+                  txt-center" placeholder="Locality ( eg. Batla house )"  required>
+                  <center><span id="so_locality"></span></center>
+        </div-->
+        <div class="form-group">
+                  <input type="text" id="o_area"class="form-control  bod-rad 
+                  txt-center" placeholder="Area ( eg. Jamia Nagar )"  required>
+                  <center><span id="so_area"></span></center>
+        </div>
+        <div class="form-group">
+                  <input type="text" id="o_city"class="form-control  bod-rad 
+                  txt-center" placeholder="City ( eg. New Delhi )"  required>
+                  <center><span id="so_city"></span></center>
+        </div>
+        <div class="form-group">
+                  <input type="text" id="o_phone"class="form-control  bod-rad 
+                  txt-center" placeholder="Mobile "  required>
+                  <center><span id="so_phone"></span></center>
+        </div>
+        <div class="form-group">
+                  <input type="password" id="o_pass"class="form-control  bod-rad 
+                  txt-center" placeholder="Password" required>
+                  <span id="so_pass"></span>
+               <center><span id=""></span></center>
+        </div>
+        <!--div class="form-group">
+                  <input type="file" id="o_img"class="  bod-rad 
+                  txt-center" required>
+                  <span id=""></span>
+               <center><span id="so_img"></span></center>
+        </div-->
+        <div class="form-group">
+                  <button id="o_signup"class="form-control btn btn-lg btn-primary input-lg bod-rad txt-center">
+                    Signup
+                  </button>
+               <center><span id="so_signup"></span></center>
+        </div>
+        <div class="form-group">
+               <center><span>Already have an account </span> <a href="#loginmodel"role="button" data-toggle="modal" data-dismiss="modal"><span class="">login here</span></a></center>
+                <br>
+        </div>
+      </div>
+      <!--div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div-->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+  </div>
+<!--div class="modal custom fade " id="place" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog mod-place"style="margin-top:60px;">
+    <div class="modal-content bod-rad">
+      <div class="modal-header"style="background-color:#FF7F50;color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="background-color:black;color:white;margin-top:-29px;margin-right:-30px;border-radius:20px;width:20px;opacity:1;">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="form-group ">
+            <select id="browsers"class="form-control input-lg"style="font-siz:1.5em;">
+            <option value="0" selected="selected"><b>Select your location</b></option>
+              <option value="Internet Explorer">Delhi</option>
+              <option value="Firefox">Mumbai</option>
+              <option value="Chrome">Kolkata</option>
+              <option value="Opera">bihar</option>
+              <option value="Safari">jamia</option>
+            </select> 
+        </div>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <span class="">OR</span><br>
+          <h4 style="color:blue">Click to choose city<hr></h4>
+          <div class=""style="font-size:1.3em;font-weight:bold;cursor:pointer;">
+            <a >Delhi</a>&nbsp;&nbsp;&nbsp;
+            <a >Mumbai</a>&nbsp;&nbsp;&nbsp;
+            <a >Kolkata</a>&nbsp;&nbsp;&nbsp;
+            <a>Patna</a>&nbsp;&nbsp;&nbsp;
+            <a >Chennai</a>&nbsp;&nbsp;&nbsp;
+            <a >Darbhanga</a>&nbsp;&nbsp;&nbsp;
+            <a >Jaipur</a>&nbsp;&nbsp;&nbsp;
+            <a >Kanpur</a>&nbsp;&nbsp;&nbsp;
+            <a >Hydrabad</a>&nbsp;&nbsp;&nbsp;
+            <a >Bengaluru</a>&nbsp;&nbsp;&nbsp;
+            <a >Bhopal</a>&nbsp;&nbsp;&nbsp;
+            <a >Aligarh</a>&nbsp;&nbsp;&nbsp;
+            <br>
+          </div>
+        </div>
+      </div>
+
+      <!--div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div-->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+  </div>
+<!--img src="/static/image/footer.png"class="img-responsive"style="margin-bottom:0px;">
+<!---->
+<!---->
+<div id="note"></div>
+<script type="text/javascript"src="{{url_for('static',filename='javascript/jquery-2.1.1.min.js')}}"></script>
+<script type="text/javascript"src="{{url_for('static',filename='javascript/bootstrap.min.js')}}"></script>
+<script type="text/javascript"src="{{url_for('static',filename='javascript/jquery.flip.min.js')}}"></script>
+<script type="text/javascript"src="{{url_for('static',filename='javascript/jquery.history.min.js')}}"></script>
+<script type="text/javascript"src="{{url_for('static',filename='javascript/custom.js')}}"></script>
+<script type="text/javascript"src="{{url_for('static',filename='javascript/script.js')}}"></script>
+<!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="{{url_for('static',filename='javascript/imagesloaded.js')}}"></script>
+<script src="{{url_for('static',filename='javascript/skrollr.js')}}"></script>
+<script src="{{url_for('static',filename='javascript/_main.js')}}"></script>
+</body>
+</html>
+
+<!--
+$(function () {
+    $(".custom-close").on('click', function() {
+        $('#myModal').modal('hide');
+    });
+});
+-->

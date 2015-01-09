@@ -1,0 +1,226 @@
+{% extends "model.html" %}
+{% block text %}
+ <!--flip-->
+ <div class="front-img">
+ 	<div id="preload">
+	       	<img src="/static/image/front1.jpg">
+	       	<img src="/static/image/cake4.jpg">
+	       	<img src="img/bcg_slide-3.jpg">
+	       	<img src="img/bcg_slide-4.jpg">
+       	</div>
+       	
+       	<main>
+       	 
+	        <section id="slide-1" class="homeSlide">
+	        	<div class="bcg" 
+	        		data-center="background-position: 50% 0px;" 
+	        		data-top-bottom="background-position: 50% -100px;" 
+	        		data-anchor-target="#slide-1"
+	        	>
+		        	<div class="hsContainer">
+			    		<div class="hsContent" data-center="bottom: 200px; opacity: 1" data-top="bottom: 1200px; opacity: 0" data-anchor-target="#slide-1 h2">
+				    		<h2>Food Tastes Better when you eat with your family...
+				    		</h2>
+			    		</div>
+		        	</div>
+	        	</div>
+		    </section>
+		    <div id="offer">
+			<section id="slide-2" class="homeSlide">
+				<div class="bcg" 
+					data-center="background-position: 50% 10px;" 
+					data-top-bottom="background-position: 50% -100px;" 
+					data-bottom-top="background-position: 50% 100px;" 
+					data-anchor-target="#slide-2"
+				>
+			    	<div class="hsContainer">
+			    		<div class="hsContent" 
+			    			data-center="opacity: 1" 
+			    			data-center-top="opacity: 0" 
+			    			data--100-bottom="opacity: 0;" 
+			    			data-anchor-target="#slide-2"
+			    		><br><br><br><br>
+				    		<span style="">
+				    			<div class="wrapper">
+		<!-- Jumbotron -->
+		<div class="main-slideshow">
+			<div id="main-slideshow" class="carousel slide" data-ride="carousel">
+				<div class="carousel-inner">
+					<!-- Slide No 1 -->
+					<div class="item active">
+						<div class="jumbotron first">
+							<div class="container">
+							<div class="row">
+								<div class="col-sm-6">
+									<font color="#00563F">
+									<h1 class="animated slideInLeft"><b>Albake Restaurant</b> 25% off</h1>
+									<p class="lead animated slideInLeft delay-1"></p>
+									<a class="btn btn-success animated slideInLeft delay-2"style="color:black"href="{{url_for('home.restaurant',city='New Delhi',rest_name='Al Bake',idi=2)}}">View All</a>
+									</font>
+								</div>
+								<div class="col-sm-6 hidden-xs">
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+					<!-- Slide No 2 -->
+					<div class="item">
+						<div class="jumbotron second">
+							<div class="container">
+								<div class="row">
+									<div class="col-sm-12">
+										<font color="#100C08">
+										<h1 class="text-center animated fadeInDown"><b>Khalsa Restaurant</b> 30% off</h1>
+										<p class="lead text-center animated fadeInDown delay-1"></p>
+										<div class="text-center animated fadeInDown delay-2">
+										<a class="btn btn-success pull-center"style="color:black;"href="{{url_for('home.restaurant',city='New Delhi',rest_name='Khalsa Restaurant',idi=3)}}">
+										View All
+										</a></div>
+										</font>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Slide No 3 -->
+					<div class="item">
+						<div class="jumbotron third">
+							<div class="container">
+							<div class="row">
+								<div class="col-sm-6">
+									<font color="#00563F">
+									<h1 class="animated slideInLeft"style="color:black;"><b>Rolls king</b><br> 15% off </h1>
+									<p class="lead animated slideInLeft delay-2">A complete meal in one...</p>
+									<a href="{{url_for('home.restaurant',city='Noida',rest_name='Rolls King',idi=5)}}"class="btn btn-success animated slideInLeft delay-3"style="color:black">
+									View </a>
+									</font>
+								</div>
+								<div class="col-sm-6 hidden-xs">
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Controls -->
+				<a class="slideshow-arrow slideshow-arrow-prev bg-hover-color" href="#main-slideshow" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+				<a class="slideshow-arrow slideshow-arrow-next bg-hover-color" href="#main-slideshow" data-slide="next"><i class="fa fa-angle-right"></i></a>
+			</div>
+		</div>
+	</div>
+				    		</span>
+				    		<br><br>
+				    		<h2 >Offer</h2>
+			    		</div>
+			    	</div>
+				</div>
+			</section>
+		    </div>
+			<section id="slide-3" class="homeSlide">
+				<div class="bcg" 
+					data-center="background-position: 50% 0px;" 
+					data-top-bottom="background-position: 50% -100px;" 
+					data-bottom-top="background-position: 50% 100px;" 
+					data-anchor-target="#slide-3"
+				>
+			    	<div class="hsContainer">
+						<div class="hsContents" 
+							data--50-bottom="opacity: 0;" 
+							data--200-bottom="opacity: 1;" 
+							data-center="opacity: 1" 
+							data-200-top="opacity: 1" 
+							data-anchor-target="#slide-3 h2"
+						>
+
+				    		 <section id="team" class="bg-light-gray">
+        <div class="container">
+            <center>
+            <div class="row">
+                <div class="col-xs-offset-1 col-xs-11 ">
+                    <h2 class="section-heading">&nbsp;&nbsp;One Man Team</h2>
+                </div>
+            </div>
+            </center>
+            <div class="col-lg-offset-1 row">
+            <center>
+                    <div class="team-member">
+                        <img src="/static/image/mehrab.jpg" class="img-responsive img-circle" alt=""style="width:200px;height:200px;border-radius:100%;">
+                        <h4>Md Mehrab Alam</h4>
+                        <p class="text-muted">Lead Developer & Designer</p>
+                        <ul class="list-inline social-buttons">
+                            <li><a href="#"><i class="fa fa-google"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </center>
+            </div>
+            <!--div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                </div>
+            </div-->
+        </div>
+    </section>
+			    		</div>
+			    	</div>
+			    	
+			    </div>
+			</section>
+			<section id="slide-4" class="homeSlide">
+				<div class="bcg" 
+					data-center="background-position: 50% 0px;" 
+					data-top-bottom="background-position: 50% -100px;" 
+					data-bottom-top="background-position: 50% 100px;" 
+					data-anchor-target="#slide-4">
+			    	<div class="hsContainer">
+						<div class="hsContent" 
+							data-bottom-top="opacity: 0" 
+							data-25p-top="opacity: 1" 
+							data-top="opacity: 1"  
+							data-anchor-target="#slide-4">
+				    		<section id="contact">
+						        <div class="row">
+									<div class="col-sm-9">
+									<div class="wrapper">
+						                        <div class="row">
+						                            <div class="col-sm-5">
+						                                <div class="form-group">
+						                                    <input type="text" class="input-lg form-control bod-rad" placeholder="Your Name *"id="con_name"autocomplete="off">
+						                                    <span id="scon_name"></span>
+						                                </div>
+						                                <div class="form-group">
+						                                    <input type="email"class="input-lg form-control bod-rad" placeholder="Your Email *"id="con_email"autocomplete="off">
+						                                    <span id="scon_email"></span>
+						                                </div>
+						                                <div class="form-group">
+						                                    <input type="tel" class="form-control input-lg bod-rad" placeholder="Your Mobile *" id="con_mobile"autocomplete="off">
+						                                    <span id="scon_mobile"></span>
+						                                </div>
+						                            </div>
+						                            <div class="col-sm-7">
+						                                <div class="form-group">
+						                                    <textarea class="form-control bod-rad" rows="8" placeholder="Your Message *" id="con_msg" required data-validation-required-message="Please enter a message."></textarea>
+						                                    <span id="scon_msg"></span>
+						                                </div>
+						                            </div>
+						                            <div class="clearfix"></div>
+						                            <div class="col-sm-12 text-center">
+						                                <span  class="cus_btn"id="con_send"style="cursor:pointer;">Send</button>
+						                            </div>
+						                        </div>
+						                </div>
+						            </div>
+								</div>
+						        </div>
+						        <br><br>
+						    </section>
+
+			    		</div>
+			    	</div>
+			    	
+			    </div>
+			</section>
+{% endblock %}

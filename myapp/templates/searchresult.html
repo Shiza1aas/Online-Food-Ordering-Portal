@@ -1,0 +1,44 @@
+{% extends "model.html"%}
+{%block title %}{% endblock %}
+{%block text %}
+	<div style="margin-top:70px;">
+	<div class="container">
+		<div class="col-sm-9">
+			<div class="alert alert-success bod-rad" role="alert" style="color:black;">Showing result of Location <strong>{{q}}</strong>..... </div>
+			{% for i in result%}
+			<a href="/restaurant/{{i[2]}}/{{i[0]}}/{{i[4]}}/"style="color:black;text-decoration:none;">
+			<div class="panel panel-primary bod-rad list-hovering">
+				<div class="panel-body">
+					<div class="col-sm-4"style="background:;">
+					<img src="/static/image/upload/{{i[3]}}"class="pull-left img-responsive bod-rad"style="margin-left:-10px;">
+					</div>
+					<div class="col-sm-8"style="background:;float:left;">
+						<div class="row">
+							<h3 class="pull-left rest-list-style-name">{{i[0]}}</h3>
+						</div>
+						<div class="row ">
+							<span class="glyphicon glyphicon-map-marker pull-left">&nbsp;{{i[1]}}</span>
+						</div>
+						<div class="row">
+							<h5 class="pull-left"><i class="fa fa-cutlery"style="margin-left:-45px;"></i>
+							<img src="/static/image/vn.jpg"class="img-responsive"style="width:40px;height:20px;margin-left:25px;margin-top:-15px;"></h5>
+						</div>
+						<div class="pull-right talkbubble "style="margin-top:-50px;">
+						<span style="margin-top:100px;font-size:1.5em;"><br><strong>View Menu</strong></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			</a>
+
+			{%endfor%}
+		</div>
+		<div class="col-sm-3">
+		<center><small style="color:#eee;">Sponsers</small></center>
+		<span ><img src="/static/image/profileback1.jpg" class="img-responsive"style="height:80px;width:600px;"></span><br>
+		<span ><img src="/static/image/profileback1.jpg" class="img-responsive"style="height:80px;width:600px;"></span><br>
+		<span ><img src="/static/image/profileback1.jpg" class="img-responsive"style="height:80px;width:600px;"></span>
+		</div>
+	</div>
+	</div>
+{%endblock%}

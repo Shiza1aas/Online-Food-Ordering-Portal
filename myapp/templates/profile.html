@@ -1,0 +1,522 @@
+{% extends "model.html"%}
+{%block title %}{% endblock %}
+{%block text %}
+<div style="margin-top:120px;">
+<div class="container">
+		<div class="row">
+			<div class="col-sm-2"style="position:fixed;">
+				<div class="">
+					<div class="">
+						<!--My Account-->
+					</div>
+					<div class=""style="margin-left:-40px;">
+					<ul id="account"class="font-choose nav nav-pills nav-stacked "style="list-style:none;margin:left:40px;"role="tablist">
+					  <li >
+					  	<a href="#"class="cus_btn_acc line" data-toggle="pill"style="background:green;"><b>Dashboard</b></a>
+					  </li>
+					  <li class="active">
+					  	<a href="#info1"class="cus_btn_acc line"data-toggle="pill"><b>My Profile</b></a>
+					  </li>
+					  {% if typ=='spl'%}
+					  <li>
+					  	<a href="#contme"class="cus_btn_acc line"data-toggle="pill"><b>Contact Us</a></b>
+					  </li>
+					  <li>
+					  	<a href="#reviewss"class="cus_btn_acc line"data-toggle="pill"><b>Reviews</a></b>
+					  </li>
+					  <li>
+					  	<a href="#userlist"class="cus_btn_acc line"data-toggle="pill"><b>Users List</a></b>
+					  </li>
+					  <li>
+					  	<a href="#restlist"class="cus_btn_acc line"data-toggle="pill"><b>Resturant List</a></b>
+					  </li>
+					  {%endif%}
+					  {%if typ=='rest'%}
+					  <li>
+					  	<a href="#up_menus"class="cus_btn_acc line"data-toggle="pill"><b>Menu</b></a>
+					  </li>
+					  <li>
+					  	<a href="#upld"class="cus_btn_acc line"data-toggle="pill"><b>Upload Menu</b></a>
+					  </li>
+					  <li>
+					  	<a href="#reviewrest"class="cus_btn_acc line"data-toggle="pill"><b>Reviews</a></b>
+					  </li>
+					  {%endif%}
+					  {%if typ!='spl'%}
+					  <li>
+					  	<a href="#hist"class="cus_btn_acc line"data-toggle="pill"><b>Order History</b></a>
+					  </li>
+					  {%endif%}
+					  <li>
+					  	<a href="#cngpass"class="cus_btn_acc line"data-toggle="pill"><b>Change Password</b></a>
+					  </li>
+					</ul>
+					</div>
+				</div>
+			</div>
+			<div class="tab-content col-sm-offset-3 col-sm-8"id="panel-tab">
+				{%if err and err!='No'%}
+					<div class="alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					  
+					<center><strong>{{err}}</strong></center>
+					</div>
+				{%endif%}
+				{%if err=='No'%}
+				{%for i in get_flashed_messages()%}
+					<div class="alert alert-success alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					  
+					<center><b>{{i}}</b></center>
+					</div>
+				{%endfor%}
+				{%endif%}
+						<div id="info1" class="tab-pane active">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								My Profile
+							</div>
+							<div class="panel-body" >
+							<div class="row">
+								<div class="col-sm-4">
+									{%if g.user[5]%}
+									<img src="/static/image/upload/{{g.user[5]}}"class="img-responsive"style="border-radius:100%;"><br>
+									{%else%}
+									<img src="/static/image/no-image.gif"class="img-responsive"style="border-radius:100%;"><br>
+									{%endif%}
+									<form action="/profile/" method="post" enctype="multipart/form-data">
+										<div class="col-sm-6">
+										<input type="file" id="pro_pic_id" name="pro_pic"class="pull-left">
+										</div>
+										<div class="col-sm-offset-3 col-sm-2">
+										<button type="submit" id="pro_pic_btn"
+										class=""disabled><span class="glyphicon glyphicon-upload fa-1x"></span></button>
+										</div>
+									</form>
+								</div>
+								<div class="col-sm-offset-1 col-sm-7">
+								<div class="form-group">
+	                                <label for="email" class="col-sm-2 control-label">Email </label>
+	                                <div class="col-sm-10">
+	                                    <input name="email" value="{{g.user[0]}}"type="text" class="form-control">
+	                                </div>
+                            	</div>&nbsp;<br>
+                            	<div class="form-group">
+	                                <label for="inputEmail1" class="col-sm-2 control-label">Name</label>
+	                                <div class="col-sm-10">
+	                                    <input name="name"id="info_e_n" value="{{g.user[1]}}"type="text" class="form-control">
+	                                </div>
+                            	</div>
+								</div>
+							</div>
+							<hr style="border:1px solid black">
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-6">
+                                    <textarea name="Add" id="info_e_add"rows="2"cols=""class="form-control">{{g.user[2]}}</textarea>
+                                    <span id="sinfo_e_add"></span>
+                                </div><br>
+                            </div>
+                            <br><br>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-2 control-label">Mobile</label>
+                                <div class="col-sm-6">
+                                    <input name="mobile"id="info_e_m"type="tel" value="{{g.user[4]}}"class="form-control">
+                                    <span id="sinfo_e_m"></span>
+                                </div>
+                            </div>
+                            <!--div class="form-group">
+                                <label for="inputEmail1" class="col-sm-2 control-label">Area</label>
+                                <div class="col-sm-6">
+                                    <input name=""id=""type="text" value=""class="form-control">
+                                </div>
+                            </div-->
+                            <br><br>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-2 control-label">City</label>
+                                <div class="col-sm-6">
+                                    <input name=""id="info_e_city"type="text" value="{{g.user[3]}}"class="form-control">
+                                    <span id="sinfo_e_city"></span>
+                                </div>
+                            </div>
+                            <br><br>
+                            {%if session['type']=='gen'%}
+                            <span id="up_general" class="glyphicon glyphicon-upload fa-2x pull-right"style="cursor:pointer;">
+							</span>
+							{%endif%}
+                            </div>
+                        </div>
+                        </div>
+                        <div id="cngpass" class=" tab-pane">
+                        <div class="panel panel-default">
+							<div class="panel-heading">
+								Change Password
+								<span id="chng_pass" class="glyphicon glyphicon-upload fa-2x pull-right"style="cursor:pointer;">
+								</span>
+							</div>
+							<div class="panel-body">
+							<div class="form-group" >
+								<label for="oldcng" class="col-sm-2 control-label">Old Password</label>
+								<div class="col-sm-8">
+								<div class="row">
+								<div class="col-xs-9">
+								<input type="password" id="oldcng" class="form-control"placeholder="password">
+								</div>
+								<div class="col-xs-2">
+									<div id="soldcng_c" class="input-group-addon addonstyle  hide">
+										<img src="/static/image/tick.png">
+									</div>
+									<div id="soldcng_w" class="input-group-addon addonstyle  hide">
+										<img src="/static/image/cross.png">
+									</div>
+								</div><br>
+								</div>
+								</div><br>
+							</div>
+							<br><br>
+							<div class="form-group">
+									<label for="inputEmail1" class="col-sm-2 control-label">New Password</label>
+									<div class="col-sm-8">
+									<div class="row">
+									<div class="col-xs-9">
+									<input id="newcng" type="password" class="form-control "placeholder="password">
+									</div>
+									<div class="col-xs-2">
+										<div id="snewcng_c" class="input-group-addon addonstyle  hide">
+											<img src="/static/image/tick.png">
+										</div>
+										<div id="snewcng_w" class="input-group-addon addonstyle   hide">
+											<img src="/static/image/cross.png"><span style="color:red"> Atleast 6 chars</span>
+										</div>
+									</div>
+									</div>
+									</div>
+							</div>
+							<br><br>
+							<div class="form-group">
+								<label for="confcng" class="col-sm-2 control-label">Confirm Password</label>
+								<div class="col-sm-8">
+								<div class="row">
+								<div class="col-xs-9">
+								<input id="confcng" type="password" class="form-control"placeholder=" password">
+								</div>
+								<div class="col-xs-2">
+									<div id="sconfcng_c"class="input-group-addon addonstyle  hide">
+										<img src="/static/image/tick.png">
+									</div>
+									<div id="sconfcng_w"class="input-group-addon addonstyle  hide">
+										<img src="/static/image/cross.png">
+									</div>
+								</div>
+								</div>
+								<div class="pull-right">
+								<center>
+								<span id="cng_alert"></span>
+								</center>
+								</div>
+								</div>
+							</div>
+							</div>
+					</div>
+				</div>
+				{%if session['type']!='spl'%}
+				<div id='hist' class="tab-pane">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Order History <small>(latest orders)</small>
+							</div>
+							<div class="panel-body">
+								{%if ord_hist%}
+								{%if ord_hist=='no'%}
+								<div class="well" style="background:#E0FFFF;">
+								No order History
+								</div>
+								{%else%}
+								{% for i in ord_hist%}
+								<div class="well"style="background:#E0FFFF;">
+								<span class="label label-danger bod-rad"> ADDRESS</span><br>
+								<b>{{i[0]}}</b><br>
+								<span class="label label-warning bod-rad"> MENU</span><br>
+								{{i[1]}}<br>
+								{%if session['type']=='rest'%}
+								{%if i[2]==0%}
+								<span class="pull-right cus_btn ifdelv sty_cur" id="ifdelv{{i[3]}}">
+								Click if Delivered
+								</span>
+								{%else%}
+								<span class="pull-right cus_btn">Delivered</span>
+								{%endif%}
+								<br>
+								{%endif%}
+								</div>
+								{%endfor%}
+								{%endif%}
+								{%endif%}
+							</div>
+						</div>
+				</div>
+				{%endif%}
+				{%if session['type']=='spl'%}
+				<div id='contme' class="tab-pane">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Contact Us
+							</div>
+							<div class="panel-body">
+								{%if contact%}
+								{%for i in contact%}
+								<div class="well"id="sty_cur_{{i[0]}}_well">
+								<span class="label label-danger">Name</span>&nbsp;{{i[1]}}>
+								<span class="label label-default pull-right">{{i[5]}}</span><br>
+								<span class="label label-warning">Email</span>&nbsp;{{i[2]}}<br>
+								<span class="label label-info">Mobile</span>&nbsp;{{i[3]}}<br>
+								<span class="label label-danger">Text</span><br>{{i[4]}}
+								<span class="cus_btn pull-right sty_cur"id="sty_cur_{{i[0]}}">Delete</span><br>
+								</div>
+								{%endfor%}
+								{%else%}
+								---------
+								{%endif%}
+							</div>
+						</div>
+				</div>
+				<div id='reviewss' class="tab-pane">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Reviews
+							</div>
+							<div class="panel-body">
+								{%if review%}
+								{%for i in review%}
+								<div class="well">
+								{%if i[2]==''%}
+								<img src="/static/image/no-img.jpg" style="width:50px;height:50px;border-radius:100%;">
+								{%else%}
+								<img src="/static/image/upload/{{i[2]}}" style="width:50px;height:50px;border-radius:100%;">
+								{%endif%}
+								<span class="label label-warning">{{i[0]}}</span>&nbsp;
+								<span class="label label-success">{{i[5]}}</span>
+								<span class="label label-default pull-right">{{i[3]}}</span>
+								<div class="hori"></div>
+								<p>
+									{{i[1]}}
+								</p>
+								<button class="btn btn-danger bod-rad pull-left delt_rev"value="{{i[4]}}">
+								Delete
+								</button>
+								{%if i[6]==0%}
+								<button class="btn btn-success bod-rad pull-right cnf_rev"value="{{i[4]}}">
+								Confirm
+								</button>
+								{%else%}
+								<button class="btn btn-success bod-rad pull-right">Confirmed</button>
+								{%endif%}
+								<br>
+								</div>
+								{%endfor%}
+								{%else%}
+								<div class="rev_hov">
+								No reviews..
+								</div>
+								{%endif%}
+							</div>
+						</div>
+				</div>
+				<div id='userlist' class="tab-pane">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								User List
+							</div>
+							<div class="panel-body">
+								{%if u_datauser%}
+								{%for dt in u_datauser%}
+								<div class="well"id="well_{{dt[1]}}">
+								<span class="label label-info">Email :</span><b> {{dt[0]}}</b><br>
+								<span class="label label-success">Name :</span><b> {{dt[1]}}</b><br>
+								<span class="label label-warning">Address :</span><b> {{dt[2]}},{{dt[3]}}</b><br>
+								<span class="label label-danger">Mobile :</span><b> {{dt[4]}}</b><br>
+								<span class="cus_btn clk_u pull-right" id="u_{{dt[0]}}" style="cursor:pointer;">Delete</span><br>
+								</div>
+								{%endfor%}
+								{%endif%}
+							</div>
+						</div>
+				</div>
+				<div id='restlist' class="tab-pane">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Restaurant List
+							</div>
+							<div class="panel-body">
+								{%if r_datauser%}
+								{%for dt in r_datauser%}
+								<div class="well"id="well_{{dt[1]}}_{{dt[4]}}">
+								<span class="label label-info">Email :</span><b> {{dt[0]}}</b><br>
+								<span class="label label-success">Name :</span><b> {{dt[1]}}</b><br>
+								<span class="label label-warning">Address :</span><b> {{dt[2]}},{{dt[3]}}</b><br>
+								<span class="label label-danger">Mobile :</span><b>{{dt[4]}}</b><br>
+								<span class="cus_btn clk_rest pull-right" id="restu_{{dt[0]}}" style="cursor:pointer;">Delete</span>
+								</div>
+								{%endfor%}
+								{%endif%}
+							</div>
+						</div>
+				</div>
+				{%endif%}
+				{%if session['type']=='rest'%}
+				<div id='reviewrest' class="tab-pane">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Reviews
+							</div>
+							<div class="panel-body">
+								{%if review%}
+								{%for i in review%}
+								<div class="well">
+								{%if i[2]==''%}
+								<img src="/static/image/no-img.jpg" style="width:50px;height:50px;border-radius:100%;">
+								{%else%}
+								<img src="/static/image/upload/{{i[2]}}" style="width:50px;height:50px;border-radius:100%;">
+								{%endif%}
+								<span class="label label-warning">{{i[0]}}</span>&nbsp;
+								<span class="label label-default pull-right">{{i[3]}}</span>
+								<div class="hori"></div>
+								<p>
+									{{i[1]}}
+								</p>
+								</div>
+								{%endfor%}
+								{%else%}
+								<div class="rev_hov">
+								No reviews..
+								</div>
+								{%endif%}
+							</div>
+						</div>
+				</div>
+				<div id='up_menus' class="tab-pane">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Menu
+							</div>
+							<div class="panel-body">
+								{%if products%}
+								<table class="table">
+								<thead>
+								<tr>
+									<td>NAME</td>
+									<td>Type</td>
+									<td>Price</td>
+								</tr>
+								</thead>
+								{%for i in products%}
+								<tbody>
+									<td>{{i[0]}}</td>
+									<td>{{i[1]}}</td>
+									<td>{{i[2]}}</td>
+									<td><button class="btn btn-danger bod-rad de_menu"value="{{i[3]}}">delete</button></td>
+								</tbody>
+								{%endfor%}
+								</table>
+								{%else%}
+								You have not added any product
+								{%endif%}
+							</div>
+						</div>
+				</div>
+				{%endif%}
+				{%if typ!='gen'%}
+				<div id="upld" class=" tab-pane">
+                        <div class="panel panel-default">
+							<div class="panel-heading">
+								Upload Menu
+							</div>
+							<div class="panel-body">
+
+								<div class=" col-sm-5">
+								<div class="form-group">
+									<label class="control-label col-sm-3" style="padding-top:5px;">Menu 1.</label>
+									<div class="col-sm-8">
+									<input type="text" id="up_m1"class="form-control bod-rad">
+									</div>
+								</div>
+								<br><br>
+								<div class="form-group">
+									<label class="control-label col-sm-3" style="padding-top:5px;">Menu 2. </label>
+									<div class="col-sm-8">
+									<input type="text" id="up_m2"class="form-control bod-rad">
+									</div>
+								</div>
+								<br><br>
+								<div class="form-group">
+									<label class="control-label col-sm-3" style="padding-top:5px;">Menu 3. </label>
+									<div class="col-sm-8">
+									<input type="text" id="up_m3" class="form-control bod-rad">
+									</div>
+								</div>
+								<br><br>
+								<div class="form-group">
+									<label class="control-label col-sm-3" style="padding-top:5px;">Menu 4. </label>
+									<div class="col-sm-8">
+									<input type="text" id="up_m4" class="form-control bod-rad">
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<div class="row">
+									<input type="radio" name="f-type-1" value="v"><b> VEG</b>&nbsp;
+									<input type="radio" name="f-type-1" value="n"><b> NON-VEG</b>&nbsp;&nbsp;
+									<b>Price:</b><input type="number" id="up_m1_price" min='1'class="bod-rad" style="width:70px; ">
+									<span id="up_submit_m1" class="glyphicon glyphicon-upload fa-2x pull-right"style="cursor:pointer;">
+									</span>
+									</div>
+								</div>
+								<br>
+								<div class="form-group">
+									<div class="row">
+									<input type="radio" name="f-type-2" value="v"><b> VEG</b>&nbsp;
+									<input type="radio" name="f-type-2" value="n"><b> NON-VEG</b>&nbsp;&nbsp;
+									<b>Price:</b><input type="number" id="up_m2_price" min='1'class="bod-rad" style="width:70px; ">
+									<span id="up_submit_m2" class="glyphicon glyphicon-upload fa-2x pull-right"style="cursor:pointer;">
+								</span>
+									</div>
+								</div>
+								<br>
+								<div class="form-group">
+									<div class="row">
+									<input type="radio" name="f-type-3" value="v"><b> VEG</b>&nbsp;
+									<input type="radio" name="f-type-3" value="n"><b> NON-VEG</b>&nbsp;&nbsp;
+									<b>Price:</b><input type="number"min='1' id="up_m3_price" class="bod-rad" style="width:70px; ">
+									<span id="up_submit_m3" class="glyphicon glyphicon-upload fa-2x pull-right"style="cursor:pointer;">
+								</span>
+									</div>
+								</div>
+								<br>
+								<div class="form-group">
+									<div class="row">
+									<input type="radio" name="f-type-4" value="v"><b> VEG</b>&nbsp;
+									<input type="radio" name="f-type-4" value="n"><b> NON-VEG</b>&nbsp;&nbsp;
+									<b>Price:</b><input type="number" min='1' id="up_m4_price" class="bod-rad" style="width:70px; ">
+									<span id="up_submit_m4" class="glyphicon glyphicon-upload fa-2x pull-right"style="cursor:pointer;">
+									</span>
+									</div>
+								</div>
+								<br><br>
+								<div class="form-group pull-right">
+									<center>
+									<span id="upld_alert"></span>
+									</center>
+								</div>
+							</div>
+						</div>
+						
+							</div>
+						</div>
+						{%endif%}
+				</div>
+
+			</div>
+		</div>
+</div>
+{%endblock%}

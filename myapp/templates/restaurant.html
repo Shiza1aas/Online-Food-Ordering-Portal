@@ -1,0 +1,128 @@
+{% extends "model.html"%}
+{%block title %}{% endblock %}
+{%block text %}
+<div style="margin-top:90px;"id="load_cart_data">
+<div class="container">
+	{%if ii %}
+	{% for i in ii%}
+	<div class="col-sm-6">
+	<div class="panel panel-primary bod-rad">
+				<div class="panel-body">
+					<div class="col-sm-5"style="background:;">
+					<img src="/static/image/upload/{{i[3]}}"class="pull-left img-responsive bod-rad"style="margin-left:-10px;">
+					</div>
+					<div class="col-sm-7"style="background:;float:left;">
+						<div class="row">
+							<h3 class="pull-left rest-list-style-name">{{i[0]}}</h3>
+						</div>
+						<div class="row ">
+							<span class="glyphicon glyphicon-map-marker pull-left">&nbsp;{{i[1]}}</span>
+						</div>
+						<div class="row">
+							<h5 class="pull-left"><i class="fa fa-cutlery"style="margin-left:-45px;"></i>
+							<img src="/static/image/vn.jpg"class="img-responsive"style="width:40px;height:20px;margin-left:25px;margin-top:-15px;"></h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		{%endfor%}
+		{%endif%}
+	<div class="well well-lg bod-rad">
+		<ul class="list-group bod-rad"style="">
+		{%if r%}
+		{% for j in r%}
+		  <li class="list-group-item bod-rad"style="max-width:500px;height:40px;border:1px solid white;background:#eee;">
+		  <span class="pull-left"><b>{{j[1]}}</b>&nbsp;</span>
+		  {%if j[2]=='n'%}
+		  <img src="/static/image/nonveg.jpg"class="img-responsive pull-left"style="width:20px;height:20px;">
+		  {%else%}
+		  <img src="/static/image/veg.jpg"class="img-responsive pull-left"style="width:20px;height:20px;">
+		  {%endif%}
+		  <span class="pull-right">
+		  <span class="money_cart"><i class="fa fa-inr"></i>{{j[3]}} </span>
+		  <span class="pri_cart"><input type="number" value="1" min='1' id="qun_{{j[0]}}"style="width:30px;"></span>
+		  <button class="add_cart" value="{{j[0]}}">ADD</button>
+		  </span></li>
+		{%endfor%}
+		{%endif%}
+		</ul>
+	</div>
+	</div>
+	<div class="col-sm-5">
+		<div class="panel panel-primary bod-rad">
+			<div class="panel-heading"><center><b>YOUR <span class="glyphicon glyphicon-shopping-cart"></span> CART 	</b></center>
+			</div>
+			<div class="panel-body">
+			  <span id="cart_items_list"style="font-size:1.3em;">
+			  {%if cart %}
+			  {%for i in cart%}
+			  	<center><b>{{cart.get(i).get('nam')}} ( {{cart.get(i).get('q')}} x <i class="fa fa-inr"></i>{{cart.get(i).get('pri')}} )</b></center><span class="pull-right glyphicon glyphicon-trash trash"id='{{cart.get(i).get("pid")}}'></span><hr/>
+			  {%endfor%} 
+			  {%endif%}
+			  </span>
+			   <span class="pull-right">
+			   		<b>Total Pay</b>:<i class="fa fa-inr"></i>
+			   		{%if total %}
+			   		<span id="total_pay"><b>{{total}}</b></span>
+			   		{%else%}
+			   		<span id="total_pay"><b></b></span>
+			   		{%endif%}
+			   </span>
+			   <br>
+			   <form action="/order_checkout_billing/" method='post'>
+			 	{%if total>=300%}
+			   <button class="btn btn-success  bod-rad pull-right"><center><b>Proceed to checkout</b></center></button>
+			   {%else%}
+			   <button class="btn btn-success  bod-rad pull-right" id="checkout" disabled><center><b>Min Order <i class="fa fa-inr"></i> 300</b></center></button>
+			   {%endif%}
+			   </form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+<div class="col-sm-6">
+<div class="well " style="border-radius:0px;">
+	<!--h1 style="margin-top:-20px;background:#627BA3;color:white;max-width:200px;">Reviews</h1-->
+	<h1 class="rev_back"style="margin-top:5px;">Reviews</h1>
+	{%if review%}
+	{%for i in review%}
+	<div class="rev_hov">
+	{%if i[2]==''%}
+	<img src="/static/image/no-img.jpg" style="width:50px;height:50px;border-radius:100%;">
+	{%else%}
+	<img src="/static/image/upload/{{i[2]}}" style="width:50px;height:50px;border-radius:100%;">
+	{%endif%}
+	<span class="label label-warning">{{i[0]}}</span><span class="label label-default pull-right">{{i[3]}}</span>
+	<div class="hori"></div>
+	<p>
+		{{i[1]}}
+	</p>
+	</div><br>
+	{%endfor%}
+	{%else%}
+	<div class="rev_hov">
+	No reviews..
+	</div>
+	{%endif%}
+</div>
+</div>
+<div class="col-sm-6">
+<div class="well " style="border-radius:0px;">
+	<h1 class="rev_wrt"style="margin-top:5px;">Write Reviews</h1>
+	{%if 'user' not in session%}
+	<center>
+	<i class="fa fa-sign-in fa-2x"></i>
+	<a href="#loginmodel" role="button"  data-toggle="modal">
+        <span class="cus_btn">login to comment</span>
+    </a>
+    </center>
+    {%else%}
+    <textarea rows="5" id="rev_text"class="bod-rad form-control"maxlength="800" placeholder="Write your reviews.."> </textarea><br>
+    <center><span class="cus_btn" id="rev_sbt" style="cursor:pointer;">Submit</span></center>
+	{%endif%}
+</div>
+</div>
+</div>
+</div>
+{%endblock%}

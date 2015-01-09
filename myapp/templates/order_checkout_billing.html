@@ -1,0 +1,71 @@
+{% extends "model.html"%}
+{%block title %}{% endblock %}
+{%block text %}
+<div style="margin-top:80px;">
+	<div class="container">
+  {%if logji %}
+  {%if logji=='yes'%}
+	<div class="col-sm-offset-2 col-lg-offset-3 col-sm-5">
+	<div class="panel panel-info bod-rad">
+	<div class="panel-heading"style="color:black;font-size:1.2em;"><b>Sign-In or Continue as guest User</b></div>
+	<div class="panel-body">
+	<div class="col-md-10">
+        <form action="/order_checkout_billing/" id="checkform_bill" method="post">      
+            <div class="form-group">
+                  <input type="email"class="form-control 
+                  txt-center bod-rad " id="g_o_n_e"placeholder="your-email@example.com" name="checkout_email"  required>
+               <center><span id="sg_o_n_e"></span></center>
+            </div>
+            <div class="form-group">
+               <span class="pull-left"><input type="radio" name="guest_or_not" id="guest" checked><b>&nbsp;&nbsp;Continue as Guest</b></span><br>
+               <span class="pull-left" style="margin-left:-150px;"><input type="radio" class="pull-left" name="guest_or_not" id="iamuser"><b>&nbsp;&nbsp;I am a User</b></span><br>
+            </div>
+            <div class="form-group">
+               <input type="password" class="form-control bod-rad hide" id="g_o_n_p" placeholder="Password">
+               <center><span id="sg_o_n_p"></span></center>
+            </div>
+        </form>
+        <div class="form-group">
+               <button class="btn btn-success bod-rad hide" id="iamuser_login">Login</button>
+               <button  class="btn btn-success bod-rad" id="cont_guest">Continue</button>
+            </div>
+      
+	</div>
+	</div>
+	</div>
+	</div>
+	{%else%}
+  <div class=" col-sm-4">
+  <div class="well">
+  <center>
+  <h1 style="background-color:#1CA87F;color:white;font-size:1.3em;padding:5px 5px 5px 5px;">DELIVERY ADDRESS</h1>
+  </center><br>
+    <form action="/ordering_delivery/" id="final" method="post">
+      <span>Email&nbsp;:&nbsp;<b>{%if g.user%}{{g.user[0]}}{%else%}{{session['ord_eml']}}{%endif%}</b></span><br>
+      <div class="form-group">
+        Name:<input type="text" name="del_nam_name"id="del_nam"class="form-control bod-rad" value="{%if g.user%}{{g.user[1]}}{%endif%}"required>
+        <span id="sdel_nam"></span>
+      </div>
+      <div class="form-group">
+        Address:<textarea id="del_add"name="del_add_name"class="form-control bod-rad" rows="3"required>
+          {%if g.user%}{{g.user[2]}}{%endif%}
+        </textarea>
+         <span id="sdel_add"></span>
+      </div>
+      <div class="form-group">
+        City:<input type="text" id="del_city" name="del_city_name" class="form-control bod-rad" value="{%if g.user%}{{g.user[3]}}{%endif%}"required>
+         <span id="sdel_city"></span>
+      </div>
+      <div class="form-group">
+        Mobile:<input type="number"id="del_mob" name="del_mob_name"class="form-control bod-rad" maxlength="10" value="{%if g.user%}{{g.user[4]}}{%endif%}"required>
+         <span id="sdel_mob"></span>
+      </div>
+    </form>
+    <button class="btn btn-warning btn-lg bod-rad form-control input-lg"id="del_btnn">Place Order</button>
+    </div>
+  </div>
+  {%endif%}
+  {%endif%}
+	</div>
+</div>
+{%endblock%}
